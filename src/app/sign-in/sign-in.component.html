@@ -1,0 +1,21 @@
+<div>
+  <h1>{{title}}</h1>
+  <form #signInForm='ngForm' (ngSubmit)='signIn(signInForm)'>
+    <div class="form-group">
+      <label>Username</label>
+      <input type="text" class="form-control" [(ngModel)]='data.username' name='username' required/>
+    </div>
+    <div class="form-group">
+      <label>Password</label>
+      <input type="password" class="form-control" [(ngModel)]='data.password' name='password' required/>
+    </div>
+    <div class="form-group">
+      <button class="btn btn-primary btn-block">Login</button>
+    </div>
+    <div>
+      <a routerLink='/forgot-pwd'>Forgot Password </a>
+      New User? 
+      <a routerLink='/sign-up'>Sign Up</a>
+    </div>
+  </form>
+</div>
