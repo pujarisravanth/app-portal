@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { User } from '../User';
+import { NgForm } from '@angular/forms';
+import { HttpService } from '../http.service';
 
 @Component({
   selector: 'app-forgot-pwd',
@@ -7,14 +10,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ForgotPwdComponent implements OnInit {
   title = 'Change Password';
-  username : string;
-  password : string;
+  data = new User
   confirm_pwd : string;
-  email : string; 
 
-  constructor() { }
+  constructor(
+    private httpService : HttpService
+  ) { }
 
   ngOnInit() {
   }
 
+  forgotPassword(forgotPasswordForm : NgForm) {
+    if(this.confirm_pwd == this.data.password){
+      this.httpService.changePwd(this.data).subscribe(msg => {
+        if(msg) console.log("Sucessfully changed password");
+        else console.log("Password change failed");
+      });
+    }
+  }
 }

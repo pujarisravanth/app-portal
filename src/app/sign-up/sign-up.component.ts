@@ -25,7 +25,10 @@ export class SignUpComponent implements OnInit {
   signUp(signUpForm : NgForm) : void {
     console.log(signUpForm.value);
     if(this.confirm_pwd == this.data.password){
-      this.httpService.addUser(this.data).subscribe(data => console.log(data));
+      this.httpService.addUser(this.data).subscribe(msg => {
+        if(msg) console.log("Successfully registered");
+        else console.log("Registration failed");
+      });
     }
   }
 }

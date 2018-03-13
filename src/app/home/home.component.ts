@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { UserDetails } from '../User';
+import { User } from '../User';
 import { HttpService } from '../http.service';
 
 @Component({
@@ -9,7 +9,7 @@ import { HttpService } from '../http.service';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  user : UserDetails;
+  user = new User();
 
   constructor(
     private route: ActivatedRoute,
@@ -18,9 +18,11 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     const name= this.route.snapshot.paramMap.get('name');
-    this.httpService.getUserDetails(name).subscribe(data => console.log(data));
-    //this.httpService.getUserDetails(name).subscribe(data => this.user = Object.assign({}, data));
-    //console.log(this.user);
+    this.httpService.getUser(name).subscribe(data => this.user = { ...data });
+    /*
+    this.httpService.getUser(name).subscribe(data => this.user = { ...data },
+    error => console.log(error), () => console.log(this.user.username));
+    */
   }
 
 }
